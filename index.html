@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numan Khan - Data Analyst Portfolio</title>
+    <title>Numan Khan - Business Intelligence & Data Analytics Expert</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #8b5cf6;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
             --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
             --bg-primary: #0f172a;
             --bg-secondary: #1e293b;
             --bg-tertiary: #334155;
@@ -24,6 +29,8 @@
             --shadow: rgba(0, 0, 0, 0.3);
             --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
             --gradient-accent: linear-gradient(135deg, var(--accent), var(--primary));
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
         }
 
         * {
@@ -44,49 +51,63 @@
             overflow-x: hidden;
         }
 
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
         /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
             background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
             z-index: 1000;
             transition: all 0.3s ease;
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px;
+            height: 80px;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: 800;
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-link {
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
+            padding: 0.5rem 0;
         }
 
         .nav-link:hover,
@@ -97,7 +118,7 @@
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
@@ -127,105 +148,174 @@
             justify-content: center;
             text-align: center;
             position: relative;
-            background: radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-        }
-
-        .hero-content {
-            max-width: 800px;
             padding: 0 2rem;
         }
 
+        .hero-content {
+            max-width: 1000px;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
         .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: var(--gradient);
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff, #cbd5e1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: fadeInUp 1s ease;
+            line-height: 1.1;
         }
 
         .hero-subtitle {
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-            color: var(--text-secondary);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--primary);
             margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s both;
+            font-weight: 600;
         }
 
         .hero-description {
-            font-size: 1.1rem;
-            color: var(--text-muted);
+            font-size: 1.2rem;
+            color: var(--text-secondary);
             margin-bottom: 3rem;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            animation: fadeInUp 1s ease 0.4s both;
+            line-height: 1.8;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.6s both;
+            margin-bottom: 3rem;
         }
 
         .btn {
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             border: none;
             border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             transition: all 0.3s ease;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
             background: var(--gradient);
             color: white;
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.4);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
             color: var(--text-primary);
-            border: 2px solid var(--border);
+            border: 1px solid var(--glass-border);
         }
 
         .btn-secondary:hover {
             background: var(--bg-secondary);
             border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Sections */
         .section {
-            padding: 5rem 0;
-            max-width: 1200px;
+            padding: 6rem 0;
+            max-width: 1400px;
             margin: 0 auto;
             padding-left: 2rem;
             padding-right: 2rem;
         }
 
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
+        .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* About Section */
@@ -242,72 +332,266 @@
             line-height: 1.8;
         }
 
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
         .about-image {
+            position: relative;
+        }
+
+        .profile-img {
             width: 100%;
-            max-width: 400px;
-            height: 400px;
+            max-width: 500px;
+            height: 500px;
             border-radius: 20px;
-            background: var(--gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: white;
+            object-fit: cover;
             margin: 0 auto;
+            display: block;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating-card.experience {
+            top: 20px;
+            right: -20px;
+        }
+
+        .floating-card.certifications {
+            bottom: 20px;
+            left: -20px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
         }
 
         /* Skills Section */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
         .skill-category {
-            background: var(--bg-secondary);
-            padding: 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
-            border: 1px solid var(--border);
+            padding: 2.5rem;
             transition: transform 0.3s ease;
         }
 
         .skill-category:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
         }
 
         .skill-category h3 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 1.5rem;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
 
         .skill-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
         .skill-tag {
             background: var(--bg-tertiary);
             color: var(--text-primary);
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.25rem;
             border-radius: 25px;
             font-size: 0.9rem;
             font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Interactive Dashboard Preview */
+        .dashboard-preview {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .dashboard-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            padding: 0.5rem 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 1rem 0;
+        }
+
+        /* Tableau Dashboard Showcase */
+        .dashboard-showcase {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-showcase:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .dashboard-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .dashboard-meta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            background: var(--primary);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .dashboard-description {
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-description p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .tableau-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: var(--bg-tertiary);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .tableau-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-tertiary);
+        }
+
+        .loading-spinner {
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .loading-spinner i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .dashboard-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         /* Projects Section */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
         }
 
         .project-card {
-            background: var(--bg-secondary);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
             overflow: hidden;
-            border: 1px solid var(--border);
             transition: transform 0.3s ease;
         }
 
@@ -317,13 +601,31 @@
 
         .project-image {
             width: 100%;
-            height: 200px;
+            height: 250px;
             background: var(--gradient);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 4rem;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(37, 99, 235, 0.8), rgba(124, 58, 237, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-image::before {
+            opacity: 1;
         }
 
         .project-content {
@@ -331,7 +633,7 @@
         }
 
         .project-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--text-primary);
@@ -353,9 +655,10 @@
         .tech-tag {
             background: var(--primary);
             color: white;
-            padding: 0.3rem 0.8rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 15px;
             font-size: 0.8rem;
+            font-weight: 500;
         }
 
         .project-links {
@@ -393,30 +696,37 @@
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--bg-secondary);
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             border-radius: 15px;
-            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
         }
 
         .contact-icon {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             background: var(--gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
         }
 
         .contact-form {
-            background: var(--bg-secondary);
-            padding: 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
             border-radius: 20px;
-            border: 1px solid var(--border);
         }
 
         .form-group {
@@ -457,22 +767,23 @@
         .footer {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border);
-            padding: 2rem 0;
+            padding: 3rem 0;
             text-align: center;
-            color: var(--text-muted);
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .social-link {
-            width: 50px;
-            height: 50px;
-            background: var(--bg-tertiary);
+            width: 60px;
+            height: 60px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -480,12 +791,13 @@
             color: var(--text-secondary);
             text-decoration: none;
             transition: all 0.3s ease;
+            font-size: 1.2rem;
         }
 
         .social-link:hover {
             background: var(--primary);
             color: white;
-            transform: translateY(-2px);
+            transform: translateY(-5px);
         }
 
         /* Animations */
@@ -515,10 +827,10 @@
         @media (max-width: 768px) {
             .nav-menu {
                 position: fixed;
-                top: 70px;
+                top: 80px;
                 left: -100%;
                 width: 100%;
-                height: calc(100vh - 70px);
+                height: calc(100vh - 80px);
                 background: var(--bg-primary);
                 flex-direction: column;
                 justify-content: flex-start;
@@ -553,11 +865,50 @@
             }
 
             .section {
-                padding: 3rem 1rem;
+                padding: 4rem 1rem;
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .floating-card {
+                position: static;
+                margin: 1rem 0;
+            }
+
+            /* Tableau Dashboard Mobile Styles */
+            .dashboard-showcase {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .dashboard-title {
+                font-size: 1.3rem;
+            }
+
+            .tableau-container {
+                height: 400px;
+            }
+
+            .dashboard-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .dashboard-actions .btn {
+                width: 100%;
+                max-width: 250px;
             }
         }
 
@@ -569,19 +920,48 @@
             .skills-grid {
                 grid-template-columns: 1fr;
             }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
         }
     </style>
 </head>
 <body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">Numan Khan</div>
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                Numan Khan
+            </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#resume" class="nav-link">Resume</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <button class="mobile-menu-toggle">
@@ -593,192 +973,411 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">Hi, I'm Numan Khan</h1>
-            <h2 class="hero-subtitle">Data Analyst & Marketing Specialist</h2>
+            <div class="hero-badge">
+                <i class="fas fa-star"></i>
+                Business Intelligence Expert
+            </div>
+            <h1 class="hero-title">Transforming Data Into Strategic Insights</h1>
+            <h2 class="hero-subtitle">Business Intelligence & Data Analytics Specialist</h2>
             <p class="hero-description">
-                Results-oriented Computer Science graduate specializing in data analytics, 2 years of experience in sales and marketing, and web development, also adept at transforming complex datasets into actionable insights. 
-                Passionate about leveraging data analytics to solve real-world problems and enhance organizational efficiency.
+                I specialize in converting complex datasets into actionable business intelligence, 
+                driving data-driven decision making across organizations. With expertise in advanced 
+                analytics, visualization, and strategic reporting, I help businesses unlock their data's potential.
             </p>
             <div class="cta-buttons">
                 <a href="#projects" class="btn btn-primary">
                     <i class="fas fa-chart-bar"></i>
-                    View My Projects
+                    View My Work
                 </a>
                 <a href="#contact" class="btn btn-secondary">
                     <i class="fas fa-envelope"></i>
                     Get In Touch
                 </a>
             </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">3+</div>
+                    <div class="stat-label">Portfolio Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$10K+</div>
+                    <div class="stat-label">Client Revenue</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Orders Delivered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">20%</div>
+                    <div class="stat-label">Cost Reduction</div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="section">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content fade-in">
+        <div class="section-header">
+            <h2 class="section-title">About Me</h2>
+            <p class="section-subtitle">
+                Passionate about turning data into business value through innovative analytics and strategic insights
+            </p>
+        </div>
+        <div class="about-content">
             <div class="about-text">
                 <p>
-                    I'm a results-oriented Computer Science graduate specializing in data analytics, with proven expertise in SQL, Python, Tableau, Excel, and BigQuery. 
-                    I have hands-on experience in data analysis, statistical analysis, and data visualization across various industries.
+                    I'm a results-oriented Computer Science graduate specializing in data analytics, 
+                    adept at transforming complex datasets into actionable insights. Proficient in 
+                    SQL, Python, Tableau, Excel, and BigQuery, with hands-on experience in data 
+                    analysis, statistical analysis, and data visualization.
                 </p>
                 <p>
-                    My professional journey includes driving data-driven decision-making through projects in marketing, public health, and e-commerce. 
-                    I've successfully converted $10,000+ in client value through data-driven LinkedIn campaigns and reduced operational costs by 20% through strategic analysis.
+                    I have a proven track record of driving data-driven decision-making through projects 
+                    in marketing, public health, and e-commerce. As a Business Development Lead, I 
+                    converted $10,000+ in client revenue via cold LinkedIn DMs and email marketing 
+                    campaigns within 5 months, while reducing operational costs by 20%.
                 </p>
                 <p>
-                    I hold certifications from Google in Data Analytics and Statistics, and I'm passionate about transforming complex datasets into actionable insights 
-                    that enhance organizational efficiency and drive business growth.
+                    My approach combines technical expertise with business acumen, ensuring that every 
+                    analytics solution directly contributes to organizational goals and strategic objectives. 
+                    I'm passionate about leveraging data analytics to solve real-world problems and enhance 
+                    organizational efficiency.
                 </p>
+                <div class="dashboard-preview">
+                    <div class="dashboard-header">
+                        <h3 class="dashboard-title">Live Analytics Dashboard</h3>
+                        <div class="dashboard-controls">
+                            <button class="control-btn">Real-time</button>
+                            <button class="control-btn">Interactive</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="liveChart"></canvas>
+                    </div>
+                </div>
             </div>
             <div class="about-image">
-                <img src="Numan.png" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                <img src="Numan2.png" alt="Numan Khan" class="profile-img">
+                <div class="floating-card experience">
+                    <div class="card-title">Education</div>
+                    <div class="card-value">BS CS</div>
+                </div>
+                <div class="floating-card certifications">
+                    <div class="card-title">Certifications</div>
+                    <div class="card-value">3+</div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
     <section id="skills" class="section">
-        <h2 class="section-title">Skills & Technologies</h2>
+        <div class="section-header">
+            <h2 class="section-title">Technical Expertise</h2>
+            <p class="section-subtitle">
+                Comprehensive skills in data analytics, business intelligence, and strategic reporting
+            </p>
+        </div>
         <div class="skills-grid">
-            <div class="skill-category fade-in">
+            <div class="skill-category">
                 <h3><i class="fas fa-database"></i> Data Analytics & Programming</h3>
                 <div class="skill-list">
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">R Programming</span>
-                    <span class="skill-tag">Excel</span>
-                    <span class="skill-tag">Statistical Analysis</span>
-                    <span class="skill-tag">Data Mining</span>
-                    <span class="skill-tag">Machine Learning</span>
-                    <span class="skill-tag">EDA</span>
+                    <span class="skill-tag">SQL (Experienced)</span>
+                    <span class="skill-tag">Python (Skillful)</span>
+                    <span class="skill-tag">R Programming (Beginner)</span>
+                    <span class="skill-tag">Excel (Expert)</span>
+                    <span class="skill-tag">Statistical Analysis (Skillful)</span>
+                    <span class="skill-tag">Data Mining (Skillful)</span>
+                    <span class="skill-tag">Machine Learning (Beginner)</span>
+                    <span class="skill-tag">Data Modelling (Skillful)</span>
                 </div>
             </div>
-            <div class="skill-category fade-in">
-                <h3><i class="fas fa-chart-bar"></i> Visualization & BI Tools</h3>
+            <div class="skill-category">
+                <h3><i class="fas fa-chart-bar"></i> BI & Visualization Tools</h3>
                 <div class="skill-list">
-                    <span class="skill-tag">Tableau</span>
-                    <span class="skill-tag">Data Visualization</span>
-                    <span class="skill-tag">Business Intelligence</span>
-                    <span class="skill-tag">BigQuery</span>
-                    <span class="skill-tag">Data Modelling</span>
-                    <span class="skill-tag">ETL</span>
-                    <span class="skill-tag">Database Management</span>
+                    <span class="skill-tag">Tableau (Skillful)</span>
+                    <span class="skill-tag">Data Visualization (Experienced)</span>
+                    <span class="skill-tag">Business Intelligence (Experienced)</span>
+                    <span class="skill-tag">EDA (Expert)</span>
+                    <span class="skill-tag">Database Management (Expert)</span>
+                    <span class="skill-tag">SSMS (Experienced)</span>
+                    <span class="skill-tag">MySQL Workbench (Expert)</span>
+                    <span class="skill-tag">BigQuery (Skillful)</span>
                 </div>
             </div>
-            <div class="skill-category fade-in">
-                <h3><i class="fas fa-tools"></i> Technical Tools</h3>
+            <div class="skill-category">
+                <h3><i class="fas fa-cloud"></i> Cloud & Data Processing</h3>
                 <div class="skill-list">
-                    <span class="skill-tag">MySQL Workbench</span>
-                    <span class="skill-tag">SSMS</span>
-                    <span class="skill-tag">GitHub</span>
-                    <span class="skill-tag">WordPress</span>
-                    <span class="skill-tag">Shopify</span>
-                    <span class="skill-tag">Canva</span>
-                    <span class="skill-tag">Presentation</span>
+                    <span class="skill-tag">BigQuery (Skillful)</span>
+                    <span class="skill-tag">ETL (Skillful)</span>
+                    <span class="skill-tag">GitHub (Experienced)</span>
+                    <span class="skill-tag">Data Pipeline</span>
+                    <span class="skill-tag">Data Warehousing</span>
+                    <span class="skill-tag">Cloud Analytics</span>
+                    <span class="skill-tag">Data Processing</span>
+                    <span class="skill-tag">Data Integration</span>
                 </div>
             </div>
-            <div class="skill-category fade-in">
-                <h3><i class="fas fa-bullhorn"></i> Digital Marketing</h3>
+            <div class="skill-category">
+                <h3><i class="fas fa-cogs"></i> Digital Marketing & Tools</h3>
                 <div class="skill-list">
-                    <span class="skill-tag">Meta Ads</span>
-                    <span class="skill-tag">Digital Marketing</span>
-                    <span class="skill-tag">Social Media Handling</span>
-                    <span class="skill-tag">Email Marketing</span>
-                    <span class="skill-tag">LinkedIn Sales Navigator</span>
-                    <span class="skill-tag">Data Scraping</span>
+                    <span class="skill-tag">WordPress (Expert)</span>
+                    <span class="skill-tag">Shopify (Experienced)</span>
+                    <span class="skill-tag">Meta Ads (Experienced)</span>
+                    <span class="skill-tag">Digital Marketing (Experienced)</span>
+                    <span class="skill-tag">Social Media Handling (Experienced)</span>
+                    <span class="skill-tag">Canva (Expert)</span>
+                    <span class="skill-tag">Email Marketing (Experienced)</span>
+                    <span class="skill-tag">Presentation (Expert)</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card fade-in">
-                <div class="project-image">
-                    <i class="fas fa-chart-line"></i>
+        <!-- Tableau Dashboards Section -->
+        <section id="projects" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Interactive Tableau Dashboards</h2>
+                <p class="section-subtitle">
+                    Real-world business intelligence solutions with live interactive dashboards
+                </p>
+            </div>
+            
+            <!-- Dashboard 1: House Sales Analytics -->
+            <div class="dashboard-showcase">
+                <div class="dashboard-header">
+                    <h3 class="dashboard-title">
+                        <i class="fas fa-home"></i>
+                        King County Washington House Sales Analytics
+                    </h3>
+                    <div class="dashboard-meta">
+                        <span class="meta-tag">Real Estate Analytics</span>
+                        <span class="meta-tag">Geographic Analysis</span>
+                        <span class="meta-tag">Price Prediction</span>
+                    </div>
                 </div>
-                <div class="project-content">
-                    <h3 class="project-title">Radio Promotion Budget Impact Analysis</h3>
-                    <p class="project-description">
-                        Conducted exploratory data analysis and linear regression to assess the relationship between radio promotion budget and sales performance. 
-                        Developed a simple linear regression model showing that a $1M increase in radio promotion budget is associated with an $8.17M increase in sales.
+                <div class="dashboard-description">
+                    <p>
+                        Comprehensive real estate analytics dashboard analyzing house sales data from King County, Washington. 
+                        Features interactive maps, price trend analysis, and predictive insights for property valuation. 
+                        Includes geographic distribution, market trends, and investment opportunity identification.
                     </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Linear Regression</span>
-                        <span class="tech-tag">Statistical Analysis</span>
-                        <span class="tech-tag">EDA</span>
+                </div>
+                <div class="tableau-container">
+                    <div class="tableau-placeholder" id="tableau1">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading Interactive Dashboard...</p>
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="#" class="">
-                            <i class="fas fa-external-link-alt"></i>
-                            View Analysis
-                        </a>
-                        <a href="#" class="">
-                            <i class="fab fa-github"></i>
-                            Source Code
-                        </a>
-                    </div>
+                </div>
+                <div class="dashboard-actions">
+                    <a href="https://public.tableau.com/app/profile/numan.khan/viz/Housesalespricedashboard_16991137237220/KINGCOUNTYWASHINGTONHOUSESALES" 
+                       target="_blank" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        Open Full Dashboard
+                    </a>
+                    <button class="btn btn-secondary" onclick="toggleFullscreen('tableau1')">
+                        <i class="fas fa-expand"></i>
+                        Fullscreen View
+                    </button>
                 </div>
             </div>
 
-            <div class="project-card fade-in">
-                <div class="project-image">
-                    <i class="fas fa-virus"></i>
+            <!-- Dashboard 2: Actionable KPIs -->
+            <div class="dashboard-showcase">
+                <div class="dashboard-header">
+                    <h3 class="dashboard-title">
+                        <i class="fas fa-chart-line"></i>
+                        Actionable KPIs & Performance Metrics
+                    </h3>
+                    <div class="dashboard-meta">
+                        <span class="meta-tag">KPI Dashboard</span>
+                        <span class="meta-tag">Performance Metrics</span>
+                        <span class="meta-tag">Business Intelligence</span>
+                    </div>
                 </div>
-                <div class="project-content">
-                    <h3 class="project-title">COVID-19 Data Analysis with BigQuery</h3>
-                    <p class="project-description">
-                        Analyzed the COVID-19 dataset using SQL in BigQuery, revealing global totals of 770,644,152 cases and 6,963,700 deaths. 
-                        Identified the United States as the country with the highest death toll and North America as the most affected continent.
+                <div class="dashboard-description">
+                    <p>
+                        Strategic KPI dashboard providing actionable insights for business performance monitoring. 
+                        Features real-time metrics, trend analysis, and executive-level reporting capabilities. 
+                        Designed for data-driven decision making and strategic planning.
                     </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">SQL</span>
-                        <span class="tech-tag">BigQuery</span>
-                        <span class="tech-tag">Data Analysis</span>
-                        <span class="tech-tag">Data Visualization</span>
+                </div>
+                <div class="tableau-container">
+                    <div class="tableau-placeholder" id="tableau2">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading Interactive Dashboard...</p>
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">
-                            <i class="fas fa-external-link-alt"></i>
-                            View Dashboard
-                        </a>
-                        <a href="#" class="project-link">
-                            <i class="fab fa-github"></i>
-                            Source Code
-                        </a>
-                    </div>
+                </div>
+                <div class="dashboard-actions">
+                    <a href="https://public.tableau.com/app/profile/numan.khan/viz/ActionableKPIs_17591614165600/Dashboard1" 
+                       target="_blank" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        Open Full Dashboard
+                    </a>
+                    <button class="btn btn-secondary" onclick="toggleFullscreen('tableau2')">
+                        <i class="fas fa-expand"></i>
+                        Fullscreen View
+                    </button>
                 </div>
             </div>
 
-            <div class="project-card fade-in">
-                <div class="project-image">
-                    <i class="fas fa-heartbeat"></i>
+            <!-- Additional Projects Section -->
+            <div class="section-header" style="margin-top: 4rem;">
+                <h2 class="section-title">Additional Projects</h2>
+                <p class="section-subtitle">
+                    More business intelligence solutions and data analytics projects
+                </p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-virus"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">COVID-19 Data Analysis with BigQuery</h3>
+                        <p class="project-description">
+                            Analyzed the COVID-19 dataset using SQL in BigQuery, revealing global totals of 770,644,152 cases and 6,963,700 deaths, 
+                            comprising 0.9036 percent of the world's population. Identified the United States as the country with the highest death 
+                            toll (1,127,152 deaths) and North America as the most affected continent.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">BigQuery</span>
+                            <span class="tech-tag">Data Analysis</span>
+                            <span class="tech-tag">Data Visualization</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                View Analysis
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-file-alt"></i>
+                                Case Study
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="project-content">
-                    <h3 class="project-title">Bella Beat Data Analysis Case Study</h3>
-                    <p class="project-description">
-                        Conducted extensive data analysis using Excel, SQL, and R on a COVID-19 dataset with BigQuery. 
-                        Discovered that Bella Beat users averaged 7,637.911 daily steps (below the 8,000-step goal) and provided strategic recommendations.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Excel</span>
-                        <span class="tech-tag">SQL</span>
-                        <span class="tech-tag">R Programming</span>
-                        <span class="tech-tag">BigQuery</span>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-heartbeat"></i>
                     </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">
-                            <i class="fas fa-external-link-alt"></i>
-                            View Case Study
-                        </a>
-                        <a href="#" class="project-link">
-                            <i class="fab fa-github"></i>
-                            Source Code
-                        </a>
+                    <div class="project-content">
+                        <h3 class="project-title">Bella Beat Data Analysis Case Study</h3>
+                        <p class="project-description">
+                            Conducted extensive data analysis using Excel, SQL, and R, leveraging a COVID-19 dataset with BigQuery. 
+                            Discovered that Bella Beat users averaged 7,637.911 daily steps (below the 8,000-step goal). Recommended user 
+                            engagement strategies and benefits for reaching the target, contributing to Bellabeat's smart device market competitiveness.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Excel</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">R Programming</span>
+                            <span class="tech-tag">BigQuery</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                View Case Study
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-file-alt"></i>
+                                Documentation
+                            </a>
+                        </div>
                     </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Radio Promotion Budget Impact Analysis</h3>
+                        <p class="project-description">
+                            Conducted exploratory data analysis and linear regression to assess the relationship between radio promotion budget and sales performance. 
+                            Developed a simple linear regression model to interpret key metrics such as slope, y-intercept, and statistical significance. 
+                            Identified a statistically significant relationship showing that a 1 million dollar increase in radio promotion budget is associated with an 8.17 million dollar increase in sales.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Linear Regression</span>
+                            <span class="tech-tag">Statistical Analysis</span>
+                            <span class="tech-tag">Data Modeling</span>
+                            <span class="tech-tag">Marketing Analytics</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                View Analysis
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-file-alt"></i>
+                                Case Study
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="section">
+        <div class="section-header">
+            <h2 class="section-title">Professional Resume</h2>
+            <p class="section-subtitle">
+                View and download my comprehensive resume with detailed experience and qualifications
+            </p>
+        </div>
+        <div style="max-width: 1000px; margin: 0 auto; padding: 0 2rem;">
+            <div style="background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem;">
+                <h3 style="font-size: 1.6rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <i class="fas fa-file-pdf"></i>
+                    Numan Khan - Resume
+                </h3>
+                <div style="position: relative; width: 100%; height: 600px; background: var(--bg-tertiary); border-radius: 15px; overflow: hidden; margin-bottom: 2rem; border: 1px solid var(--border);">
+                    <iframe 
+                        id="resumeIframe"
+                        src="portfolio/Numan_ResumeKSA.pdf" 
+                        width="100%" 
+                        height="100%" 
+                        style="border: none; border-radius: 15px;"
+                        title="Numan Khan Resume"
+                        onload="hideResumeFallback()"
+                        onerror="showResumeFallback()">
+                    </iframe>
+                    <div id="resumeFallback" style="display: none; text-align: center; padding: 2rem; color: var(--text-secondary);">
+                        <h4 style="color: var(--primary); margin-bottom: 1rem;">
+                            <i class="fas fa-file-pdf"></i> Resume PDF
+                        </h4>
+                        <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+                            Your browser may not support PDF viewing. Please use the buttons below to view or download the resume.
+                        </p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            <a href="portfolio/Numan_ResumeKSA.pdf" target="_blank" style="background: var(--gradient); color: white; padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-external-link-alt"></i>
+                                Open in New Tab
+                            </a>
+                            <a href="portfolio/Numan_ResumeKSA.pdf" download="Numan_Khan_Resume.pdf" style="background: var(--glass); backdrop-filter: blur(10px); color: var(--text-primary); border: 1px solid var(--glass-border); padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="portfolio/Numan_ResumeKSA.pdf" target="_blank" style="background: var(--gradient); color: white; padding: 1.2rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.75rem; transition: all 0.3s ease;">
+                        <i class="fas fa-external-link-alt"></i>
+                        Open in New Tab
+                    </a>
+                    <a href="portfolio/Numan_ResumeKSA.pdf" download="Numan_Khan_Resume.pdf" style="background: var(--glass); backdrop-filter: blur(10px); color: var(--text-primary); border: 1px solid var(--glass-border); padding: 1.2rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.75rem; transition: all 0.3s ease;">
+                        <i class="fas fa-download"></i>
+                        Download PDF
+                    </a>
                 </div>
             </div>
         </div>
@@ -786,9 +1385,14 @@
 
     <!-- Contact Section -->
     <section id="contact" class="section">
-        <h2 class="section-title">Get In Touch</h2>
+        <div class="section-header">
+            <h2 class="section-title">Let's Work Together</h2>
+            <p class="section-subtitle">
+                Ready to transform your data into strategic business intelligence? Let's discuss your project.
+            </p>
+        </div>
         <div class="contact-content">
-            <div class="contact-info fade-in">
+            <div class="contact-info">
                 <div class="contact-item">
                     <div class="contact-icon">
                         <i class="fas fa-envelope"></i>
@@ -804,7 +1408,7 @@
                     </div>
                     <div>
                         <h4>Phone</h4>
-                        <p>+996508203901</p>
+                        <p>+966 50 820 3901</p>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -813,18 +1417,31 @@
                     </div>
                     <div>
                         <h4>Location</h4>
-                        <p>Saudi Arabia, Riyadh</p>
+                        <p>Riyadh, Saudi Arabia</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h4>Availability</h4>
+                        <p>Available for new projects</p>
                     </div>
                 </div>
             </div>
-            <form class="contact-form fade-in">
+            <form class="contact-form">
                 <div class="form-group">
-                    <label for="name">Name</label>
+                    <label for="name">Full Name</label>
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company">
                 </div>
                 <div class="form-group">
                     <label for="subject">Subject</label>
@@ -851,17 +1468,36 @@
             <a href="https://www.linkedin.com/in/numan-khan-a6b055218/" class="social-link">
                 <i class="fab fa-linkedin"></i>
             </a>
-            <a href="" class="social-link">
+            <a href="https://ishajain.my.canva.site/numanalytics/" class="social-link">
                 <i class="fas fa-globe"></i>
             </a>
             <a href="mailto:001numan@gmail.com" class="social-link">
                 <i class="fas fa-envelope"></i>
             </a>
         </div>
-        <p>&copy; 2024 Numan Khan. All rights reserved.</p>
+        <p>&copy; 2024 Numan Khan. All rights reserved. | Business Intelligence & Data Analytics Expert</p>
     </footer>
 
     <script>
+        // Initialize Particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#2563eb' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#2563eb', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
+            },
+            retina_detect: true
+        });
+
         // Mobile menu toggle
         const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
         const navMenu = document.querySelector('.nav-menu');
@@ -931,6 +1567,74 @@
             observer.observe(el);
         });
 
+        // Live Chart Animation
+        const ctx = document.getElementById('liveChart').getContext('2d');
+        const liveChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Revenue Growth',
+                    data: [12000, 19000, 15000, 25000, 22000, 30000],
+                    borderColor: '#2563eb',
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Customer Acquisition',
+                    data: [800, 1200, 1000, 1500, 1300, 1800],
+                    borderColor: '#7c3aed',
+                    backgroundColor: 'rgba(124, 58, 237, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#f8fafc',
+                            usePointStyle: true
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#cbd5e1' },
+                        grid: { color: '#475569' }
+                    },
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        ticks: { color: '#cbd5e1' },
+                        grid: { color: '#475569' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        ticks: { color: '#cbd5e1' },
+                        grid: { drawOnChartArea: false }
+                    }
+                }
+            }
+        });
+
+        // Animate chart data
+        setInterval(() => {
+            const newData = liveChart.data.datasets[0].data.map(value => 
+                value + (Math.random() - 0.5) * 2000
+            );
+            liveChart.data.datasets[0].data = newData;
+            liveChart.update('none');
+        }, 3000);
+
         // Form submission
         document.querySelector('.contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -942,8 +1646,8 @@
             // Here you would typically send the data to a server
             console.log('Form submitted:', data);
             
-            // Show success message (you can customize this)
-            alert('Thank you for your message! I\'ll get back to you soon.');
+            // Show success message
+            alert('Thank you for your message! I\'ll get back to you within 24 hours.');
             
             // Reset form
             this.reset();
@@ -970,29 +1674,150 @@
             });
         });
 
-        // Typing effect for hero title (optional)
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.innerHTML = '';
-            
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            }
-            
-            type();
+        // Counter animation for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent.replace(/[^\d]/g, ''));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = counter.textContent;
+                        clearInterval(timer);
+                    } else {
+                        if (counter.textContent.includes('+')) {
+                            counter.textContent = Math.floor(current) + '+';
+                        } else if (counter.textContent.includes('%')) {
+                            counter.textContent = Math.floor(current) + '%';
+                        } else if (counter.textContent.includes('$')) {
+                            counter.textContent = '$' + Math.floor(current / 1000) + 'M+';
+                        } else {
+                            counter.textContent = Math.floor(current);
+                        }
+                    }
+                }, 20);
+            });
         }
 
-        // Uncomment the lines below if you want a typing effect
-        // const heroTitle = document.querySelector('.hero-title');
-        // const originalText = heroTitle.textContent;
-        // typeWriter(heroTitle, originalText, 100);
+        // Trigger counter animation when hero section is visible
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        heroObserver.observe(document.querySelector('.hero-stats'));
+
+        // Tableau Dashboard Integration - Using iframe embedding
+        function initTableauDashboards() {
+            // Dashboard 1: House Sales Analytics
+            const tableau1 = document.getElementById('tableau1');
+            if (tableau1) {
+                tableau1.innerHTML = `
+                    <iframe 
+                        src="https://public.tableau.com/views/Housesalespricedashboard_16991137237220/KINGCOUNTYWASHINGTONHOUSESALES?:showVizHome=no&:embed=true&:display_count=yes&:origin=viz_share_link" 
+                        width="100%" 
+                        height="600" 
+                        frameborder="0"
+                        style="border-radius: 15px;"
+                        onload="console.log('House Sales Dashboard loaded')">
+                    </iframe>
+                `;
+            }
+
+            // Dashboard 2: Actionable KPIs
+            const tableau2 = document.getElementById('tableau2');
+            if (tableau2) {
+                tableau2.innerHTML = `
+                    <iframe 
+                        src="https://public.tableau.com/views/ActionableKPIs_17591614165600/Dashboard1?:showVizHome=no&:embed=true&:display_count=yes&:origin=viz_share_link" 
+                        width="100%" 
+                        height="600" 
+                        frameborder="0"
+                        style="border-radius: 15px;"
+                        onload="console.log('KPI Dashboard loaded')">
+                    </iframe>
+                `;
+            }
+        }
+
+        // Fullscreen functionality for Tableau dashboards
+        function toggleFullscreen(dashboardId) {
+            const container = document.getElementById(dashboardId);
+            const iframe = container.querySelector('iframe');
+            
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().then(() => {
+                    // Resize iframe when entering fullscreen
+                    if (iframe) {
+                        iframe.style.height = '100vh';
+                        iframe.style.width = '100vw';
+                    }
+                }).catch(err => {
+                    console.log('Error attempting to enable fullscreen:', err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    // Reset iframe size when exiting fullscreen
+                    if (iframe) {
+                        iframe.style.height = '600px';
+                        iframe.style.width = '100%';
+                    }
+                });
+            }
+        }
+
+        // Resume PDF handling functions
+        function hideResumeFallback() {
+            const fallback = document.getElementById('resumeFallback');
+            if (fallback) {
+                fallback.style.display = 'none';
+            }
+        }
+
+        function showResumeFallback() {
+            const fallback = document.getElementById('resumeFallback');
+            if (fallback) {
+                fallback.style.display = 'block';
+            }
+        }
+
+        // Initialize Tableau dashboards when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Delay initialization to ensure page is fully loaded
+            setTimeout(initTableauDashboards, 1000);
+            
+            // Check if PDF loads properly after a delay
+            setTimeout(function() {
+                const iframe = document.getElementById('resumeIframe');
+                if (iframe) {
+                    try {
+                        // Try to access iframe content to check if PDF loaded
+                        iframe.contentWindow.document;
+                    } catch (e) {
+                        // If we can't access content, show fallback
+                        showResumeFallback();
+                    }
+                }
+            }, 3000);
+        });
+
+        // Handle fullscreen changes
+        document.addEventListener('fullscreenchange', function() {
+            if (document.fullscreenElement) {
+                // Dashboard is in fullscreen
+                document.body.style.overflow = 'hidden';
+            } else {
+                // Dashboard exited fullscreen
+                document.body.style.overflow = 'auto';
+            }
+        });
     </script>
 </body>
 </html>
-
-
-
